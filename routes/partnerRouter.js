@@ -2,7 +2,7 @@ const express = require("express");
 const partnerRouter = express.Router();
 
 partnerRouter
-    .route("/partners")
+    .route("/")
     .all((req, res, next) => {
         res.statusCode = 200;
         res.setHeader("Content-Type", "text/plain");
