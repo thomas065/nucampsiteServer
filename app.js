@@ -44,37 +44,22 @@ app.use(session({
     saveUninitialized: false,
     resave: false,
     store: new FileStore()
-}))
+}));
 
 // this is where we'll add authentication because here is where we start to send stuff back to the client
+app.use('/', indexRouter);
+app.use('/users', usersRouter);
+
 function auth(req, res, next) {
     console.log(req.session);
 
     if (!req.session.user) {
-        const authHeader = req.headers.authorization;
-        if (!authHeader) {
-            const err = new Error(`You have not been authenticated!`);
-            res.setHeader(`WWW-Authenticate`, `Basic`);
-            err.status = 401;
-            return next(err);
-        }
-
-        const auth = Buffer.from(authHeader.split(' ')[1], 'base64')
-            .toString()
-            .split(':');
-        const user = auth[0];
-        const pass = auth[1];
-        if (user === 'admin' && pass === 'password') {
-            req.session.user = 'admin';
-            return next(); // authorized
-        } else {
-            const err = new Error(`You are not authorized`);
-            res.setHeader(`WWW-Authenticate`, `Basic`);
-            err.status = 401;
-            return next(err);
-        } // test in Chrome Incognito-mode for no caching of data!
-        } else {
-        if (req.session.user === 'admin') {
+        const err = new Error(`You have not been authenticated!`);
+        err.status = 401;
+        return next(err);
+        // test in Chrome Incognito-mode for no caching of data!
+    } else {
+        if (req.session.user === 'authenticated') {
             return next();
         } else {
             const err = new Error(`You are not authorized`);
@@ -88,8 +73,7 @@ app.use(auth);
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
+
 app.use('/campsites', campsiteRouter);
 app.use('/promotions', promotionRouter);
 app.use('/partners', partnerRouter);
