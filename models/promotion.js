@@ -13,7 +13,7 @@ const promotionSchema = new Schema(
         },
         image: {
             type: String,
-            required: true,
+            required: false,
         },
         featured: {
             type: Boolean,
@@ -26,7 +26,7 @@ const promotionSchema = new Schema(
         },
         description: {
             type: String,
-            required: true,
+            required: false,
         },
     },
     {

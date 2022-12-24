@@ -35,19 +35,19 @@ const campsiteSchema = new Schema(
         },
         description: {
             type: String,
-            required: true,
+            required: false,
         },
         image: {
             type: String,
-            required: true,
+            required: false,
         },
         elevation: {
             type: Number,
-            required: true,
+            required: false,
         },
         cost: {
             type: Currency,
-            required: true,
+            required: false,
             min: 0,
         },
         featured: {
