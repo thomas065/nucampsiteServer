@@ -6,6 +6,15 @@ const userSchema = new Schema({
 	admin: {
 		type: Boolean,
 		default: false
+	},
+	// Add more fields here
+	firstname: {
+		type: String,
+		default: ''
+	},
+	lastname: {
+		type: String,
+		default: ''
 	}
 });
 

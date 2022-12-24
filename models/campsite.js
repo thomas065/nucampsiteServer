@@ -17,8 +17,8 @@ const commentSchema = new Schema(
             required: true,
         },
         author: {
-            type: String,
-            required: true,
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'User',
         },
     },
     {
@@ -35,19 +35,19 @@ const campsiteSchema = new Schema(
         },
         description: {
             type: String,
-            required: false,
+            required: true,
         },
         image: {
             type: String,
-            required: false,
+            required: true,
         },
         elevation: {
             type: Number,
-            required: false,
+            required: true,
         },
         cost: {
             type: Currency,
-            required: false,
+            required: true,
             min: 0,
         },
         featured: {
